@@ -3,15 +3,12 @@
         "firstName": "Amritha",
         "lastName": "Ragavi"
     },
-    "Gender": "Female",
     "mobileNumber": 7854632189,
     "DOB": {
-        "day": "14",
-        "month": "December",
-        "year": "2021"
-
+        "day": "11",
+        "month": "July",
+        "year": "1995"
     },
-        
     "Subjects": "Java",
     "address": {
         "currentAddress": "36,JS street",
