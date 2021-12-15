@@ -1,14 +1,17 @@
-class Registeration{
-    get PracticeFormText() {return $ ("pattern-backgound playgound-header");}
-    get ClickOnSubmitButton() { return $("//button[@id='submit']"); }
-    get ThanksPopUpHeader() { return $ ('#example-modal-sizes-title-lg')}
-    get ClickOnCloseButton() { return $('#closeLargeModal')}
-    
+class Registeration {
+    get PracticeFormText() { return $("pattern-backgound playgound-header"); }
+
+    get clickOnSubmitButton() { return $(".btn.btn-primary") }
     async submitButton() {
-        await this.ClickOnSubmitButton.click();
+        await this.clickOnSubmitButton.click();
     }
-    async closeButton(){
-        await this.ClickOnCloseButton.click();
+
+    //get ThanksPopUpHeader() { return $('//thead/tr/th[1]') }
+    get ThanksPopUPHeaderText() { return $("#example-modal-sizes-title-lg") }
+
+    get ClickOnCloseButton() { return $('#closeLargeModal') }
+    async closeButton() {
+        await this.ClickOnCloseButton.waitForDisplayed();
     }
 }
 export default new Registeration()

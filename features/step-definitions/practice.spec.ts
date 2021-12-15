@@ -5,9 +5,6 @@ import signUp from "../pageobjects/signUp";
 import reloadPage from "../pageobjects/reloadPage";
 import signUpDetails from "../testData/signUpDetails.json";
 import faker from "faker";
-import elementPage from "../pageobjects/elementPage";
-
-
 
 
 Given(/^This is the practice form page of ToolsQA$/, async () => {
@@ -15,59 +12,35 @@ Given(/^This is the practice form page of ToolsQA$/, async () => {
 });
 
 When(/^I enter the data in all the required fields$/, async () => {
-    await signUp.setFirstAndLastName(signUpDetails.name.firstName,signUpDetails.name.lastName);
-    await signUp.selectDateOfBirth();
-    await signUp.setMobileNumber(signUpDetails.mobileNumber)
-    await signUp.selectGender();
+    await signUp.setFirstAndLastName(signUpDetails.name.firstName, signUpDetails.name.lastName);
     await signUp.emailAddress(faker.internet.email());
-    
+    await signUp.selectGender();
+    await signUp.setMobileNumber(signUpDetails.mobileNumber)
+    await signUp.setDataOfBirth();
 });
 
-Then(/^I should see the Button as \"([^\"]*)\"$/, async (submit) => {
-    await expect(registration.submitButton).toHaveText(submit);
+Then(/^I should see the Button as \"([^\"]*)\"$/, async (Submit) => {
+    await expect(registration.clickOnSubmitButton).toHaveTextContaining(Submit);
 });
 
-When(/^I Click submit button$/, async () => {
-    await signUp.submitButton()
+When(/^I Click Submit button$/, async () => {
+    await signUp.submitButton();
 });
-
+// Then(/^I should see the popup message details of form heading as \"([^\"]*)\"$/, async (label)=>{
+//     await expect(registration.ThanksPopUpHeader).toHaveTextContaining(label);
+//   });
 Then(/^I should see the popup page and see the heading as \"([^\"]*)\"$/, async (thanksforsubmittingtheform) => {
-    await expect(registration.ThanksPopUpHeader).toHaveText(thanksforsubmittingtheform);
+    await expect(registration.ThanksPopUPHeaderText).toHaveTextContaining(thanksforsubmittingtheform)
 });
+
+// Then(/^I should see the popup page and see the heading as \"([^\"]*)\"$/, async (Thanksforsubmitting) => {
+//     await expect(registration.ThanksPopUpHeader).toHaveTextContaining(Thanksforsubmitting);
+// });
 
 When(/^I will click on close Button$/, async () => {
-    await registration.closeButton()
+    await registration.closeButton();
 });
 
 Then(/^the page reloads and the header will be \"([^\"]*)\"$/, async (practiceform) => {
     await expect(reloadPage).toHaveText(practiceform)
-});
-
-// When(/^I click Elements$/, async ()=> {
-//    await elementPage.ElementButton()
-    
-//   });
-
-//   Then(/^I should see the RadioButton$/, async ()=> {
-//     await expect(elementPage).toHaveText(RadioButton)
-    
-// });
-
-//   When(/^I click RadioButton$/, async ()=> {
-//    await elementPage.RadioButton()
-
-    
-//   });
-//   Then(/^I should see the text as \"([^\"]*)\"$/, async (doulikethesite, )=> {
-//     await expect(elementPage).toHaveText(doulikethesite)
-// });
-
-//   When(/^I click yes$/, async ()=> {
-//          await elementPage.clickingYes
-    
-//    });
-// Then(/^I should see the text as \"([^\"]*)\"$/, async (youhaveselectedyes)=> {
-//     await expect(elementPage).toHaveText(youhaveselectedyes)
-//    });
-
-  
+});  

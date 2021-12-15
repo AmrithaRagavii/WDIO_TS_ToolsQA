@@ -2,48 +2,56 @@ import signUpDetails from "../testData/signUpDetails.json";
 
 class SignUp {
 
-    get nameText() { return $("#userName-label"); }
-    get firstName() { return $("#firstName") }
-    get lastName() { return $("#lastName") }
-    get mobileText() { return $('#userNumber') }
-    
-    get ClickingOnSubmitButton() { return $(".btn.btn-primary") }
-
-
-
-
+    get firstNameElement() { return $("#firstName") }
+    get lastNameElement() { return $("#lastName") }
     async setFirstAndLastName(firstname: string, lastname: string) {
-        await this.firstName.setValue(firstname)
-        await this.lastName.setValue(lastname)
+        await this.firstNameElement.setValue(firstname)
+        await this.lastNameElement.setValue(lastname)
     }
-    get email(){ return $("#userEmail")}
-    async emailAddress(emailid){
+    get email() { return $("#userEmail") }
+    async emailAddress(emailid) {
         await this.email.setValue(emailid)
-
     }
-    get gender() { return $("#gender-radio-2") }
+
+    get gender() { return $("//label[@for='gender-radio-2']") }
     async selectGender() {
         await this.gender.click()
-        await this.gender.selectByVisibleText(signUpDetails.Gender)
     }
-
+    get mobileNumberElement() { return $('#userNumber') }
     async setMobileNumber(mobileNumber: number) {
-        await this.mobileText.setValue(mobileNumber)
+        await this.mobileNumberElement.setValue(mobileNumber)
     }
-
-    get dateOfBirthText() { return $('#dateOfBirthInput'); }
-    get dayElement() { return $(".react-datepicker__day.react-datepicker__day--014")}
-    get monthElement() { return $(".react-datepicker__month-select") }
-    get yearElement() { return $(".react-datepicker__year-select") }
-    async selectDateOfBirth() {
-        await this.dateOfBirthText.click();
-        //await this.dateOfBirthText.selectByVisibleText(signUpDetails.DOB.day)
-        await this.monthElement.click();
-        await this.dayElement.click()
+    get dateOfBirthElement() {
+        return $("#dateOfBirthInput")
+    }
+    get monthElement() {
+        return $(".react-datepicker__month-select")
+    }
+    get yearElement() {
+        return $(".react-datepicker__year-select")
+    }
+    get calander() {
+        //return $("//div[@role='listbox']")
+        return $(".react-datepicker__month");
+    }
+    get weekDay() {
+        return $("//div[@class='react-datepicker__day react-datepicker__day--011']");
+    }
+    async setDataOfBirth() {
+        await this.dateOfBirthElement.clearValue();
+        await this.monthElement.waitForDisplayed()
+        await browser.pause(3000);
+        await this.monthElement.click()
         await this.monthElement.selectByVisibleText(signUpDetails.DOB.month)
+        await browser.pause(3000);
         await this.yearElement.click()
         await this.yearElement.selectByVisibleText(signUpDetails.DOB.year)
-        await this.dayElement.waitForClickable()
+        await this.yearElement.click()
+        await browser.pause(3000);
+        await this.calander.moveTo()
+        await this.weekDay.isSelected()
+        await this.weekDay.click()
+        await browser.pause(3000);
     }
 
     get state() { return $("#state") }
@@ -55,15 +63,12 @@ class SignUp {
         await this.state.selectByVisibleText(signUpDetails.address.state)
         await this.city.click()
         await this.city.selectByVisibleText(signUpDetails.address.city)
-
     }
 
+    get ClickingOnSubmitButton() { return $("#submit") }
+    //get clickOnSubmitButton() { return $(".btn.btn-primary") }
     async submitButton() {
-        await this.ClickingOnSubmitButton.click();
+        await this.ClickingOnSubmitButton.isClickable();
     }
-
-
-
-
 }
 export default new SignUp()
