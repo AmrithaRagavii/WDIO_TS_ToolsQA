@@ -5,6 +5,7 @@ import signUp from "../pageobjects/signUp";
 import reloadPage from "../pageobjects/reloadPage";
 import signUpDetails from "../testData/signUpDetails.json";
 import faker from "faker";
+import handling from "../pageobjects/handling";
 
 
 Given(/^This is the practice form page of ToolsQA$/, async () => {
@@ -19,28 +20,53 @@ When(/^I enter the data in all the required fields$/, async () => {
     await signUp.setDataOfBirth();
 });
 
-Then(/^I should see the Button as \"([^\"]*)\"$/, async (Submit) => {
-    await expect(registration.clickOnSubmitButton).toHaveTextContaining(Submit);
-});
 
 When(/^I Click Submit button$/, async () => {
     await signUp.submitButton();
-});
-// Then(/^I should see the popup message details of form heading as \"([^\"]*)\"$/, async (label)=>{
-//     await expect(registration.ThanksPopUpHeader).toHaveTextContaining(label);
-//   });
-Then(/^I should see the popup page and see the heading as \"([^\"]*)\"$/, async (thanksforsubmittingtheform) => {
-    await expect(registration.ThanksPopUPHeaderText).toHaveTextContaining(thanksforsubmittingtheform)
-});
 
-// Then(/^I should see the popup page and see the heading as \"([^\"]*)\"$/, async (Thanksforsubmitting) => {
-//     await expect(registration.ThanksPopUpHeader).toHaveTextContaining(Thanksforsubmitting);
-// });
+});
+Then(/^I should see the popup page and see the heading as \"([^\"]*)\"$/, async (thanksforsubbmittingtheform)=> {
+
+    await signUp.headerElement.waitForDisplayed()
+    await expect(signUp.headerElement).toBeDisplayed()
+})
 
 When(/^I will click on close Button$/, async () => {
-    await registration.closeButton();
+   // await signUp.closeButton();
 });
 
-Then(/^the page reloads and the header will be \"([^\"]*)\"$/, async (practiceform) => {
-    await expect(reloadPage).toHaveText(practiceform)
-});  
+When(/^I click Alerts, Frame & Windows$/, async () => {
+//await handling.clickOnFrame.waitForClickable();
+await browser.url("https://demoqa.com/browser-windows")
+    await handling.alertFrameWindow();
+    // await browser.pause(3000)
+});
+// When(/^I select Browser Windows$/, async () => {
+//     await handling.BrowserWindow();
+// });
+
+Then(/^I should see the header as \"([^\"]*)\"$/, async (browserwindows) => {
+    await expect(handling.browserWindowsHeader).toHaveTextContaining(browserwindows);
+});
+
+When(/^I click New Tab button$/, async () => {
+    await handling.newTabButton()
+    const switchWindow = await browser.getWindowHandles()
+    await browser.switchToWindow(switchWindow[1])
+
+});
+
+Then(/^It should navigate and validate the switched window with header \"([^\"]*)\"$/, async (thisisasamplepage) => {
+    await expect(handling.newWindowHeader).toHaveText(thisisasamplepage)
+    const switchWindow = await browser.getWindowHandles()
+    await browser.closeWindow()
+    await browser.switchToWindow(switchWindow[0])
+});
+
+When(/^I click Alerts$/, async ()=> {
+    await handling.alertButton()
+  });
+
+  Then(/^I should see the header as $/, async (alerts)=> {
+      await expect(handling.getHeaderAsAlert).toHaveTextContaining(alerts);
+  });
