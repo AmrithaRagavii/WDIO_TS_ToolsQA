@@ -65,10 +65,19 @@ class SignUp {
         await this.city.selectByVisibleText(signUpDetails.address.city)
     }
 
-    get ClickingOnSubmitButton() { return $("#submit") }
-    //get clickOnSubmitButton() { return $(".btn.btn-primary") }
+    get ClickingOnSubmitButton() { return $("//div[@class='mt-4 justify-content-end row']/div[@class='text-right col-md-2 col-sm-12']/button[@id='submit']") }
     async submitButton() {
-        await this.ClickingOnSubmitButton.isClickable();
+        await this.ClickingOnSubmitButton.scrollIntoView();
+        await this.ClickingOnSubmitButton.click();
+    }
+
+    get headerElement(){ return $("#example-modal-sizes-title-lg")}
+    
+    get ClickOnCloseButton() { return $('//button[@id="closeLargeModal"]') }
+    async closeButton() {
+        
+        await this.ClickOnCloseButton.waitForDisplayed();
+
     }
 }
 export default new SignUp()
