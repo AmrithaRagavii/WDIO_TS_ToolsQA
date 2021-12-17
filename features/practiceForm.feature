@@ -8,15 +8,12 @@ Feature: Automate ToolsQA practice form
         Then I should see the popup page and see the heading as "Thanks for subbmitting the form"
         When I will click on close Button
 
-
     Scenario: Handling Alerts& Windows
         When I click Alerts, Frame & Windows
         # And I select Browser Windows
         Then I should see the header as "Browser Windows"
         When I click New Tab button
         Then It should navigate and validate the switched window with header "This is a sample page"
-        When I click Alerts
-        Then I should see the header as "Alerts"
 
 # Scenario: Handling Widgets
 #     When I click Widgets
