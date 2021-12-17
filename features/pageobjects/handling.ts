@@ -14,7 +14,7 @@ class Handling{
         await this.clickingOnNewTabButton.click();
     }
     get newWindowHeader() { return $("#sampleHeading"); }
-    get clickOnAlertButton() { return $("//li[@class='btn btn-light active']/span[text()='Alerts']"); }
+    get clickOnAlertButton() { return $("//li[@class='btn btn-light ']/span[text()='Alerts']")}
     async alertButton() {
         await this.clickOnAlertButton.scrollIntoView();
         await this.clickOnAlertButton.click();
