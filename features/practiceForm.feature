@@ -10,7 +10,6 @@ Feature: Automate ToolsQA practice form
 
     Scenario: Handling Alerts& Windows
         When I click Alerts, Frame & Windows
-        # And I select Browser Windows
         Then I should see the header as "Browser Windows"
         When I click New Tab button
         Then It should navigate and validate the switched window with header "This is a sample page"

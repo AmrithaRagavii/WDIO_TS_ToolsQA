@@ -1,11 +1,9 @@
 import { Given, Then, When } from "@wdio/cucumber-framework";
-import registration from "../pageobjects/registration";
 import signUp from "../pageobjects/signUp";
 import signUpDetails from "../testData/signUpDetails.json";
 import faker from "faker";
-import handling from "../pageobjects/handling";
-import homepagePage from "../pageobjects/homepage.page";
-
+import handling from "../pageobjects/handlingPage";
+import homepagePage from "../pageobjects/homePage.page";
 
 Given(/^This is the practice form page of ToolsQA$/, async () => {
     await homepagePage.openUrl();
@@ -29,18 +27,13 @@ Then(/^I should see the popup page and see the heading as \"([^\"]*)\"$/, async 
 });
 
 When(/^I will click on close Button$/, async () => {
-    // await signUp.closeButton();
+    await signUp.closeButton();
 });
 
 When(/^I click Alerts, Frame & Windows$/, async () => {
-    //await handling.clickOnFrame.waitForClickable();
     await browser.url("https://demoqa.com/browser-windows")
     await handling.alertFrameWindow();
-    // await browser.pause(3000)
 });
-// When(/^I select Browser Windows$/, async () => {
-//     await handling.BrowserWindow();
-// });
 
 Then(/^I should see the header as \"([^\"]*)\"$/, async (browserwindows) => {
     await expect(handling.browserWindowsHeader).toHaveTextContaining(browserwindows);
