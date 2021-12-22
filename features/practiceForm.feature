@@ -13,11 +13,3 @@ Feature: Automate ToolsQA practice form
         Then I should see the header as "Browser Windows"
         When I click New Tab button
         Then It should navigate and validate the switched window with header "This is a sample page"
-
-# Scenario: Handling Widgets
-#     When I click Widgets
-#     And I select Slider
-#     Then I validate Slider header
-#     When I click Select Menu
-#     Then I should see header as Select Menu
-#     When I handle dropdown menus
